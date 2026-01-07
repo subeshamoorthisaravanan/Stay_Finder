@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation | Stay Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="confirmation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-overlay" id="mainLoader">
+        <div class="logo-loader">
+            <div class="logo">
+                <span>S</span><span>tay</span> <span>F</span><span>inder</span>
+            </div>
+            <div class="loading-text">Preparing your booking details...</div>
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-red">S</span>
+                        <span class="logo-text">tay <span class="logo-blue">Finder</span></span>
+                    </a>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="index.html" class="btn-login">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="my-bookings.html" class="btn-register">
+                        <i class="fas fa-receipt"></i> My Bookings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Confirmation Main -->
+    <main class="confirmation-container">
+        <div class="container">
+            <!-- Success Animation -->
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle-bg" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <h1 class="confirmation-title">Booking Confirmed!</h1>
+                <p class="confirmation-subtitle">Your stay is all set. We've sent a confirmation to your email.</p>
+            </div>
+
+            <!-- Confirmation Details -->
+            <div class="confirmation-card animate-slide-in">
+                <!-- Booking Header -->
+                <div class="booking-header">
+                    <div class="booking-id">
+                        <span class="label">Booking ID</span>
+                        <span class="value" id="bookingId">SF-7894561230</span>
+                    </div>
+                    <div class="booking-date">
+                        <span class="label">Booking Date</span>
+                        <span class="value" id="bookingDate">Dec 20, 2024</span>
+                    </div>
+                    <div class="booking-status">
+                        <span class="status-badge confirmed">Confirmed</span>
+                    </div>
+                </div>
+
+                <!-- Hotel Info -->
+                <div class="hotel-section">
+                    <h2><i class="fas fa-hotel"></i> Hotel Details</h2>
+                    <div class="hotel-details">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop" 
+                             alt="Hotel" id="confirmationHotelImage">
+                        <div class="hotel-info">
+                            <h3 id="confirmationHotelName">Taj Mahal Palace, Mumbai</h3>
+                            <p class="location" id="confirmationHotelLocation">
+                                <i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra
+                            </p>
+                            <div class="hotel-rating">
+                                <span class="rating">4.8</span>
+                                <span class="reviews">(1,247 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Timeline -->
+                <div class="timeline-section">
+                    <h2><i class="fas fa-calendar-alt"></i> Your Stay</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Check-in</h4>
+                                <p class="date" id="checkinDate">Dec 25, 2024</p>
+                                <p class="time">From 2:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Duration</h4>
+                                <p class="duration" id="stayDuration">5 nights</p>
+                                <p class="nights" id="nightsCount">5 nights stay</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h4>Check-out</h4>
+                                <p class="date" id="checkoutDate">Dec 30, 2024</p>
+                                <p class="time">Until 12:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guest Info -->
+                <div class="guest-section">
+                    <h2><i class="fas fa-user-friends"></i> Guest Information</h2>
+                    <div class="guest-details">
+                        <div class="guest-info">
+                            <p><strong>Name:</strong> <span id="guestName">John Doe</span></p>
+                            <p><strong>Email:</strong> <span id="guestEmail">john.doe@example.com</span></p>
+                            <p><strong>Phone:</strong> <span id="guestPhone">+91 9876543210</span></p>
+                            <p><strong>Guests:</strong> <span id="guestCount">2 adults, 0 children</span></p>
+                            <p><strong>Room:</strong> <span id="roomType">Deluxe King Room</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="price-section">
+                    <h2><i class="fas fa-rupee-sign"></i> Payment Summary</h2>
+                    <div class="price-details">
+                        <div class="price-row">
+                            <span>Room Charges (5 nights × ₹28,999)</span>
+                            <span id="roomCharges">₹1,44,995</span>
+                        </div>
+                        <div class="price-row">
+                            <span>GST & Taxes (18%)</span>
+                            <span id="taxesAmount">₹26,099</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Service Charge</span>
+                            <span id="serviceCharge">₹2,000</span>
+                        </div>
+                        <div class="price-row discount">
+                            <span>Discount (25% OFF)</span>
+                            <span>-<span id="discountAmount">₹36,249</span></span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Total Amount Paid</span>
+                            <span id="totalAmount">₹1,36,845</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="payment-section">
+                    <h2><i class="fas fa-credit-card"></i> Payment Information</h2>
+                    <div class="payment-details">
+                        <p><strong>Payment Method:</strong> <span id="paymentMethod">Credit Card</span></p>
+                        <p><strong>Transaction ID:</strong> <span id="transactionId">TXN7894561230</span></p>
+                        <p><strong>Payment Status:</strong> <span class="status-paid">Paid</span></p>
+                        <p><strong>Payment Date:</strong> <span id="paymentDate">Dec 20, 2024</span></p>
+                    </div>
+                </div>
+
+                <!-- Important Information -->
+                <div class="info-section">
+                    <h2><i class="fas fa-info-circle"></i> Important Information</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <div>
+                                <h4>Check-in/Check-out</h4>
+                                <p>Check-in: 2:00 PM | Check-out: 12:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-utensils"></i>
+                            <div>
+                                <h4>Breakfast</h4>
+                                <p>Complimentary breakfast included for all guests</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-wifi"></i>
+                            <div>
+                                <h4>Free WiFi</h4>
+                                <p>High-speed WiFi available throughout the property</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-ban"></i>
+                            <div>
+                                <h4>Cancellation Policy</h4>
+                                <p>Free cancellation until Dec 20, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="printConfirmation()">
+                        <i class="fas fa-print"></i> Print Confirmation
+                    </button>
+                    <button class="btn-secondary" onclick="downloadConfirmation()">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn-success" onclick="window.location.href='my-bookings.html'">
+                        <i class="fas fa-list"></i> View All Bookings
+                    </button>
+                    <button class="btn-outline" onclick="window.location.href='index.html'">
+                        <i class="fas fa-plus"></i> Book Another Stay
+                    </button>
+                </div>
+
+                <!-- Share Booking -->
+                <div class="share-section">
+                    <h3>Share your booking</h3>
+                    <div class="share-buttons">
+                        <button class="share-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </button>
+                        <button class="share-btn email">
+                            <i class="fas fa-envelope"></i> Email
+                        </button>
+                        <button class="share-btn copy" onclick="copyBookingLink()">
+                            <i class="fas fa-copy"></i> Copy Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h2><i class="fas fa-road"></i> What's Next?</h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Confirmation Email</h3>
+                            <p>You'll receive a confirmation email within 15 minutes with all details.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Hotel Contact</h3>
+                            <p>The hotel will contact you 24 hours before check-in for any special requests.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Check-in Process</h3>
+                            <p>Present this confirmation and a valid ID at the reception during check-in.</p>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="printConfirmation()">
+                            <i class="fas fa-print"></i> Print Confirmation
+                        </button>
+                        <button class="btn-secondary" onclick="downloadConfirmationPDF()">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                        <button class="btn-success" onclick="window.location.href='my-bookings.html'">
+                            <i class="fas fa-list"></i> View All Bookings
+                        </button>
+                    </div>
+                    <div class="share-section">
+                        <h3>Share your booking</h3>
+                        <div class="share-buttons">
+                            <button class="share-btn whatsapp" onclick="shareViaWhatsApp()">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="share-btn email" onclick="shareViaEmail()">
+                                <i class="fas fa-envelope"></i> Email
+                            </button>
+                            <button class="share-btn copy" onclick="copyBookingLink()">
+                                <i class="fas fa-copy"></i> Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Booking link copied to clipboard!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Stay Finder. All rights reserved. Booking ID: <span id="footerBookingId">SF-7894561230</span></p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-rupay"></i>
+                    <i class="fas fa-university"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Booking link copied to clipboard!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="confirmation.js"></script>
+    <script>
+        // Hide loader when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loader = document.getElementById('mainLoader');
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 1000);
+        });
+
+        // Copy booking link function
+        function copyBookingLink() {
+            const bookingLink = window.location.href;
+            navigator.clipboard.writeText(bookingLink).then(() => {
+                showToast('Booking link copied to clipboard!');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Print confirmation
+        function printConfirmation() {
+            showToast('Opening print preview...');
+            setTimeout(() => window.print(), 500);
+        }
+
+        // Download confirmation as PDF
+        function downloadConfirmation() {
+            showToast('Preparing PDF download...');
+            // In a real app, this would generate and download a PDF
+            setTimeout(() => {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.download = 'StayFinder-Booking-Confirmation.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showToast('PDF downloaded successfully!');
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

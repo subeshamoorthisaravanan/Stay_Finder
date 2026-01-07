@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Hotels | Stay Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-overlay" id="mainLoader">
+        <div class="logo-loader">
+            <div class="logo">
+                <span>S</span><span>tay</span> <span>F</span><span>inder</span>
+            </div>
+            <div class="loading-text">Searching for hotels...</div>
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-red">S</span>
+                        <span class="logo-text">tay <span class="logo-blue">Finder</span></span>
+                    </a>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="index.html" class="btn-login">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="my-bookings.html" class="btn-register">
+                        <i class="fas fa-receipt"></i> My Bookings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Container -->
+    <div class="search-container">
+        <div class="container">
+            <div class="search-box">
+                <form class="search-form" id="searchForm">
+                    <div class="search-row">
+                        <div class="search-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Destination</label>
+                            <input type="text" 
+                                   class="search-input" 
+                                   id="destination"
+                                   placeholder="Where are you going?"
+                                   value="Mumbai, Maharashtra">
+                        </div>
+                        
+                        <div class="search-group">
+                            <label><i class="fas fa-calendar"></i> Check-in</label>
+                            <input type="text" 
+                                   class="search-input datepicker" 
+                                   id="checkin"
+                                   placeholder="Select date">
+                        </div>
+                        
+                        <div class="search-group">
+                            <label><i class="fas fa-calendar"></i> Check-out</label>
+                            <input type="text" 
+                                   class="search-input datepicker" 
+                                   id="checkout"
+                                   placeholder="Select date">
+                        </div>
+                        
+                        <div class="search-group">
+                            <label><i class="fas fa-user-friends"></i> Guests & Rooms</label>
+                            <div class="guest-selector">
+                                <input type="text" 
+                                       class="search-input guest-input" 
+                                       value="2 Adults, 0 Children, 1 Room"
+                                       placeholder="Select guests and rooms"
+                                       readonly>
+                                <div class="guest-dropdown">
+                                    <div class="guest-counter">
+                                        <div class="counter-item">
+                                            <span>Adults</span>
+                                            <div class="counter-controls">
+                                                <button type="button" class="counter-btn minus">-</button>
+                                                <span class="count">2</span>
+                                                <button type="button" class="counter-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="counter-item">
+                                            <span>Children</span>
+                                            <div class="counter-controls">
+                                                <button type="button" class="counter-btn minus">-</button>
+                                                <span class="count">0</span>
+                                                <button type="button" class="counter-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="counter-item">
+                                            <span>Rooms</span>
+                                            <div class="counter-controls">
+                                                <button type="button" class="counter-btn minus">-</button>
+                                                <span class="count">1</span>
+                                                <button type="button" class="counter-btn plus">+</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="apply-btn">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="search-group">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    <main class="search-results">
+        <div class="container">
+            <div class="results-layout">
+                <!-- Left Sidebar - Filters -->
+                <aside class="filters-sidebar">
+                    <div class="filters-header">
+                        <h3><i class="fas fa-filter"></i> Filters</h3>
+                        <button class="clear-filters" onclick="clearAllFilters()">Clear All</button>
+                    </div>
+                    
+                    <!-- Price Range -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-rupee-sign"></i> Price Range (per night)</h4>
+                        <div class="price-range">
+                            <div class="range-values">
+                                <span id="minPrice">₹2,000</span>
+                                <span id="maxPrice">₹50,000</span>
+                            </div>
+                            <input type="range" 
+                                   id="priceSlider" 
+                                   min="2000" 
+                                   max="50000" 
+                                   step="1000" 
+                                   value="50000"
+                                   title="Select maximum price range"
+                                   oninput="updatePriceRange()">
+                        </div>
+                    </div>
+                    
+                    <!-- Star Rating -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-star"></i> Star Rating</h4>
+                        <div class="rating-filters">
+                            <label class="rating-filter">
+                                <input type="checkbox" name="rating" value="5">
+                                <span class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    5 Star
+                                </span>
+                            </label>
+                            <label class="rating-filter">
+                                <input type="checkbox" name="rating" value="4">
+                                <span class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    4 Star & above
+                                </span>
+                            </label>
+                            <label class="rating-filter">
+                                <input type="checkbox" name="rating" value="3">
+                                <span class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    3 Star & above
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Amenities -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-check-circle"></i> Amenities</h4>
+                        <div class="amenity-filters">
+                            <label class="amenity-filter">
+                                <input type="checkbox" name="amenity" value="wifi">
+                                <i class="fas fa-wifi"></i> Free WiFi
+                            </label>
+                            <label class="amenity-filter">
+                                <input type="checkbox" name="amenity" value="pool">
+                                <i class="fas fa-swimming-pool"></i> Swimming Pool
+                            </label>
+                            <label class="amenity-filter">
+                                <input type="checkbox" name="amenity" value="spa">
+                                <i class="fas fa-spa"></i> Spa
+                            </label>
+                            <label class="amenity-filter">
+                                <input type="checkbox" name="amenity" value="parking">
+                                <i class="fas fa-parking"></i> Free Parking
+                            </label>
+                            <label class="amenity-filter">
+                                <input type="checkbox" name="amenity" value="breakfast">
+                                <i class="fas fa-utensils"></i> Breakfast Included
+                            </label>
+                            <label class="amenity-filter">
+                                <input type="checkbox" name="amenity" value="gym">
+                                <i class="fas fa-dumbbell"></i> Fitness Center
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Hotel Type -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-hotel"></i> Hotel Type</h4>
+                        <div class="type-filters">
+                            <label class="type-filter">
+                                <input type="checkbox" name="type" value="luxury">
+                                <span>Luxury Hotels</span>
+                            </label>
+                            <label class="type-filter">
+                                <input type="checkbox" name="type" value="boutique">
+                                <span>Boutique Hotels</span>
+                            </label>
+                            <label class="type-filter">
+                                <input type="checkbox" name="type" value="resort">
+                                <span>Resorts</span>
+                            </label>
+                            <label class="type-filter">
+                                <input type="checkbox" name="type" value="budget">
+                                <span>Budget Hotels</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Review Score -->
+                    <div class="filter-section">
+                        <h4><i class="fas fa-thumbs-up"></i> Review Score</h4>
+                        <div class="review-filters">
+                            <label class="review-filter">
+                                <input type="checkbox" name="review" value="9">
+                                <span class="score">9+</span>
+                                <span>Excellent</span>
+                            </label>
+                            <label class="review-filter">
+                                <input type="checkbox" name="review" value="8">
+                                <span class="score">8+</span>
+                                <span>Very Good</span>
+                            </label>
+                            <label class="review-filter">
+                                <input type="checkbox" name="review" value="7">
+                                <span class="score">7+</span>
+                                <span>Good</span>
+                            </label>
+                            <label class="review-filter">
+                                <input type="checkbox" name="review" value="6">
+                                <span class="score">6+</span>
+                                <span>Pleasant</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="apply-filters-btn" onclick="applyFilters()">
+                        <i class="fas fa-check"></i> Apply Filters
+                    </button>
+                </aside>
+                
+                <!-- Main Results -->
+                <div class="results-main">
+                    <!-- Results Header -->
+                    <div class="results-header">
+                        <h1 id="searchLocation">Hotels in Mumbai, Maharashtra</h1>
+                        <div class="results-stats">
+                            <span class="hotels-count">24 hotels found</span>
+                            <span class="dates">Dec 25 - Dec 30, 2024 • 2 adults, 0 children</span>
+                        </div>
+                        
+                        <div class="sort-options">
+                            <label>Sort by:</label>
+                            <select id="sortBy" onchange="sortResults()" title="Sort hotels by different criteria">
+                                <option value="recommended">Recommended</option>
+                                <option value="price_low">Price (Low to High)</option>
+                                <option value="price_high">Price (High to Low)</option>
+                                <option value="rating">Guest Rating</option>
+                                <option value="stars">Star Rating</option>
+                                <option value="distance">Distance</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Map Toggle -->
+                    <div class="map-toggle">
+                        <button class="map-view-btn" onclick="toggleMapView()">
+                            <i class="fas fa-map-marked-alt"></i> Map View
+                        </button>
+                    </div>
+                    
+                    <!-- Hotels Grid -->
+                    <div class="hotels-grid" id="hotelsGrid">
+                        <!-- Hotels will be loaded dynamically -->
+                    </div>
+                    
+                    <!-- No Results -->
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <div class="no-results-content">
+                            <i class="fas fa-search"></i>
+                            <h2>No hotels match your search</h2>
+                            <p>Try adjusting your filters or search criteria</p>
+                            <button class="reset-search" onclick="resetSearch()">
+                                <i class="fas fa-redo"></i> Reset Search
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn prev" disabled>
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <div class="page-numbers">
+                            <span class="page-number active">1</span>
+                            <span class="page-number">2</span>
+                            <span class="page-number">3</span>
+                            <span class="page-number">4</span>
+                            <span class="page-number">5</span>
+                        </div>
+                        <button class="page-btn next">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Search Tips -->
+                    <div class="search-tips">
+                        <h3><i class="fas fa-lightbulb"></i> Search Tips</h3>
+                        <ul>
+                            <li>Book at least 30 days in advance for the best prices</li>
+                            <li>Prices are usually cheaper on weekdays</li>
+                            <li>Check multiple room types for better rates</li>
+                            <li>Look for hotels with free cancellation</li>
+                            <li>Read recent guest reviews for the latest information</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Map Modal -->
+    <div class="map-modal" id="mapModal">
+        <div class="map-modal-content">
+            <div class="map-header">
+                <h3><i class="fas fa-map-marked-alt"></i> Hotels on Map</h3>
+                <button class="close-map" onclick="closeMapModal()" title="Close map">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Interactive map showing hotel locations</p>
+                    <small>This would show all hotels on a map in a real implementation</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Stay Finder. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-rupay"></i>
+                    <i class="fas fa-university"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Sample hotels data
+        const hotelsData = [
+            {
+                id: 1,
+                name: "Taj Mahal Palace, Mumbai",
+                location: "Apollo Bandar, Colaba, Mumbai",
+                rating: 4.8,
+                reviews: 1247,
+                price: 28999,
+                oldPrice: 38999,
+                discount: 25,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop",
+                distance: "0.5 km from center",
+                freeCancellation: true,
+                breakfastIncluded: true
+            },
+            {
+                id: 2,
+                name: "The Oberoi Mumbai",
+                location: "Nariman Point, Mumbai",
+                rating: 4.7,
+                reviews: 892,
+                price: 25999,
+                oldPrice: 32999,
+                discount: 21,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600&auto=format&fit=crop",
+                distance: "1.2 km from center",
+                freeCancellation: true,
+                breakfastIncluded: true
+            },
+            {
+                id: 3,
+                name: "St. Regis Mumbai",
+                location: "Lower Parel, Mumbai",
+                rating: 4.9,
+                reviews: 567,
+                price: 32999,
+                oldPrice: 42999,
+                discount: 23,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&auto=format&fit=crop",
+                distance: "3.5 km from center",
+                freeCancellation: true,
+                breakfastIncluded: false
+            },
+            {
+                id: 4,
+                name: "Trident Nariman Point",
+                location: "Nariman Point, Mumbai",
+                rating: 4.5,
+                reviews: 1243,
+                price: 18999,
+                oldPrice: 24999,
+                discount: 24,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop",
+                distance: "1.0 km from center",
+                freeCancellation: true,
+                breakfastIncluded: true
+            },
+            {
+                id: 5,
+                name: "Four Seasons Hotel Mumbai",
+                location: "Worli, Mumbai",
+                rating: 4.6,
+                reviews: 734,
+                price: 27999,
+                oldPrice: 35999,
+                discount: 22,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&auto=format&fit=crop",
+                distance: "4.2 km from center",
+                freeCancellation: false,
+                breakfastIncluded: true
+            },
+            {
+                id: 6,
+                name: "ITC Maratha, Mumbai",
+                location: "Sahar, Mumbai",
+                rating: 4.4,
+                reviews: 987,
+                price: 16999,
+                oldPrice: 21999,
+                discount: 23,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&auto=format&fit=crop",
+                distance: "2.8 km from airport",
+                freeCancellation: true,
+                breakfastIncluded: true
+            },
+            {
+                id: 7,
+                name: "The Leela Mumbai",
+                location: "Sahar, Mumbai",
+                rating: 4.7,
+                reviews: 645,
+                price: 23999,
+                oldPrice: 29999,
+                discount: 20,
+                stars: 5,
+                amenities: ["wifi", "pool", "spa", "parking", "breakfast", "gym"],
+                type: "luxury",
+                image: "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=600&auto=format&fit=crop",
+                distance: "3.0 km from airport",
+                freeCancellation: true,
+                breakfastIncluded: false
+            },
+            {
+                id: 8,
+                name: "Novotel Mumbai Juhu Beach",
+                location: "Juhu, Mumbai",
+                rating: 4.2,
+                reviews: 432,
+                price: 12999,
+                oldPrice: 16999,
+                discount: 24,
+                stars: 4,
+                amenities: ["wifi", "pool", "parking", "breakfast", "gym"],
+                type: "resort",
+                image: "https://images.unsplash.com/photo-1564501049418-3c27787d01e8?w=600&auto=format&fit=crop",
+                distance: "On Juhu Beach",
+                freeCancellation: true,
+                breakfastIncluded: true
+            },
+            {
+                id: 9,
+                name: "The Resort Mumbai",
+                location: "Madh Island, Mumbai",
+                rating: 4.3,
+                reviews: 321,
+                price: 8999,
+                oldPrice: 11999,
+                discount: 25,
+                stars: 4,
+                amenities: ["wifi", "pool", "parking", "breakfast"],
+                type: "resort",
+                image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&auto=format&fit=crop",
+                distance: "Beachfront",
+                freeCancellation: true,
+                breakfastIncluded: true
+            },
+            {
+                id: 10,
+                name: "Hotel Marine Plaza",
+                location: "Marine Drive, Mumbai",
+                rating: 4.1,
+                reviews: 543,
+                price: 11999,
+                oldPrice: 15999,
+                discount: 25,
+                stars: 4,
+                amenities: ["wifi", "breakfast", "gym"],
+                type: "boutique",
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&auto=format&fit=crop",
+                distance: "On Marine Drive",
+                freeCancellation: false,
+                breakfastIncluded: true
+            }
+        ];
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize date pickers
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            flatpickr("#checkin", {
+                minDate: "today",
+                defaultDate: today,
+                dateFormat: "Y-m-d",
+            });
+            
+            flatpickr("#checkout", {
+                minDate: tomorrow,
+                defaultDate: tomorrow,
+                dateFormat: "Y-m-d",
+            });
+            
+            // Initialize guest selector
+            initGuestSelector();
+            
+            // Load search results
+            loadSearchResults();
+            
+            // Initialize price range slider
+            updatePriceRange();
+            
+            // Hide loader
+            setTimeout(() => {
+                const loader = document.getElementById('mainLoader');
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 1000);
+        });
+
+        // Initialize guest selector
+        function initGuestSelector() {
+            const guestSelector = document.querySelector('.guest-selector');
+            const guestDropdown = guestSelector.querySelector('.guest-dropdown');
+            const applyBtn = guestSelector.querySelector('.apply-btn');
+            
+            // Toggle dropdown
+            guestSelector.addEventListener('click', function(e) {
+                e.stopPropagation();
+                guestDropdown.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                guestDropdown.classList.remove('show');
+            });
+            
+            // Counter buttons
+            document.querySelectorAll('.counter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const isPlus = this.classList.contains('plus');
+                    const counterItem = this.closest('.counter-item');
+                    const countElement = counterItem.querySelector('.count');
+                    let count = parseInt(countElement.textContent);
+                    
+                    if (isPlus) {
+                        if (count < 10) count++;
+                    } else {
+                        if (count > (counterItem.querySelector('span').textContent.includes('Adults') ? 1 : 0)) {
+                            count--;
+                        }
+                    }
+                    
+                    countElement.textContent = count;
+                });
+            });
+            
+            // Apply button
+            applyBtn.addEventListener('click', function() {
+                const adults = document.querySelector('.counter-item:nth-child(1) .count').textContent;
+                const children = document.querySelector('.counter-item:nth-child(2) .count').textContent;
+                const rooms = document.querySelector('.counter-item:nth-child(3) .count').textContent;
+                
+                document.querySelector('.guest-input').value = 
+                    `${adults} Adult${adults > 1 ? 's' : ''}, ${children} Child${children > 1 ? 'ren' : ''}, ${rooms} Room${rooms > 1 ? 's' : ''}`;
+                
+                guestDropdown.classList.remove('show');
+                loadSearchResults();
+            });
+        }
+
+        // Update price range display
+        function updatePriceRange() {
+            const slider = document.getElementById('priceSlider');
+            const maxPrice = parseInt(slider.value);
+            document.getElementById('maxPrice').textContent = formatRupees(maxPrice);
+            document.getElementById('minPrice').textContent = formatRupees(parseInt(slider.min));
+        }
+
+        // Format Rupees
+        function formatRupees(amount) {
+            return '₹' + amount.toLocaleString('en-IN');
+        }
+
+        // Load search results
+        function loadSearchResults() {
+            const hotelsGrid = document.getElementById('hotelsGrid');
+            const noResults = document.getElementById('noResults');
+            
+            // Get filter values
+            const maxPrice = parseInt(document.getElementById('priceSlider').value);
+            const selectedRatings = getSelectedCheckboxes('rating');
+            const selectedAmenities = getSelectedCheckboxes('amenity');
+            const selectedTypes = getSelectedCheckboxes('type');
+            const selectedReviews = getSelectedCheckboxes('review');
+            const sortBy = document.getElementById('sortBy').value;
+            
+            // Filter hotels
+            let filteredHotels = hotelsData.filter(hotel => {
+                // Price filter
+                if (hotel.price > maxPrice) return false;
+                
+                // Rating filter
+                if (selectedRatings.length > 0) {
+                    if (!selectedRatings.includes(hotel.stars.toString())) return false;
+                }
+                
+                // Amenities filter
+                if (selectedAmenities.length > 0) {
+                    const hasAllAmenities = selectedAmenities.every(amenity => 
+                        hotel.amenities.includes(amenity)
+                    );
+                    if (!hasAllAmenities) return false;
+                }
+                
+                // Type filter
+                if (selectedTypes.length > 0) {
+                    if (!selectedTypes.includes(hotel.type)) return false;
+                }
+                
+                // Review filter
+                if (selectedReviews.length > 0) {
+                    const minReview = Math.min(...selectedReviews.map(r => parseInt(r)));
+                    if (hotel.rating < minReview) return false;
+                }
+                
+                return true;
+            });
+            
+            // Sort hotels
+            filteredHotels = sortHotels(filteredHotels, sortBy);
+            
+            // Check if any hotels match
+            if (filteredHotels.length === 0) {
+                hotelsGrid.innerHTML = '';
+                noResults.style.display = 'block';
+                document.querySelector('.hotels-count').textContent = '0 hotels found';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            document.querySelector('.hotels-count').textContent = `${filteredHotels.length} hotels found`;
+            
+            // Clear current results
+            hotelsGrid.innerHTML = '';
+            
+            // Display filtered hotels
+            filteredHotels.forEach(hotel => {
+                const hotelCard = createHotelCard(hotel);
+                hotelsGrid.appendChild(hotelCard);
+            });
+        }
+
+        // Get selected checkboxes
+        function getSelectedCheckboxes(name) {
+            const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        // Sort hotels
+        function sortHotels(hotels, sortBy) {
+            return [...hotels].sort((a, b) => {
+                switch(sortBy) {
+                    case 'price_low':
+                        return a.price - b.price;
+                    case 'price_high':
+                        return b.price - a.price;
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'stars':
+                        return b.stars - a.stars;
+                    case 'distance':
+                        // Simple distance comparison (in a real app, use actual coordinates)
+                        return a.distance.localeCompare(b.distance);
+                    default: // recommended
+                        // Sort by rating, then price
+                        if (b.rating !== a.rating) return b.rating - a.rating;
+                        return a.price - b.price;
+                }
+            });
+        }
+
+        // Create hotel card
+        function createHotelCard(hotel) {
+            const card = document.createElement('div');
+            card.className = 'hotel-card animate-fade-in';
+            
+            card.innerHTML = `
+                <div class="hotel-image">
+                    <img src="${hotel.image}" alt="${hotel.name}">
+                    <button class="wishlist-btn">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    ${hotel.freeCancellation ? '<span class="badge free-cancellation">Free Cancellation</span>' : ''}
+                </div>
+                
+                <div class="hotel-info">
+                    <div class="hotel-header">
+                        <div>
+                            <h3>${hotel.name}</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${hotel.location}</span>
+                                <span class="distance">${hotel.distance}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="hotel-rating">
+                            <div class="rating-score">
+                                <span class="score">${hotel.rating}</span>
+                                <span class="label">Excellent</span>
+                            </div>
+                            <span class="reviews">${hotel.reviews.toLocaleString()} reviews</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hotel-features">
+                        <div class="stars">
+                            ${'<i class="fas fa-star"></i>'.repeat(hotel.stars)}
+                            ${'<i class="far fa-star"></i>'.repeat(5 - hotel.stars)}
+                        </div>
+                        
+                        <div class="amenities">
+                            ${hotel.breakfastIncluded ? '<span class="amenity"><i class="fas fa-utensils"></i> Breakfast</span>' : ''}
+                            ${hotel.amenities.includes('wifi') ? '<span class="amenity"><i class="fas fa-wifi"></i> WiFi</span>' : ''}
+                            ${hotel.amenities.includes('pool') ? '<span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>' : ''}
+                            ${hotel.amenities.includes('spa') ? '<span class="amenity"><i class="fas fa-spa"></i> Spa</span>' : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="hotel-footer">
+                        <div class="price-section">
+                            ${hotel.oldPrice ? `
+                                <div class="old-price">${formatRupees(hotel.oldPrice)}</div>
+                                <div class="discount">${hotel.discount}% OFF</div>
+                            ` : ''}
+                            <div class="price">${formatRupees(hotel.price)}<span>/night</span></div>
+                            <div class="tax-info">+ taxes & fees</div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="view-details-btn" onclick="viewHotelDetails(${hotel.id})">
+                                View Details
+                            </button>
+                            <button class="book-now-btn" onclick="bookHotel(${hotel.id})">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Apply filters
+        function applyFilters() {
+            loadSearchResults();
+        }
+
+        // Clear all filters
+        function clearAllFilters() {
+            // Clear checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            
+            // Reset price slider
+            document.getElementById('priceSlider').value = 50000;
+            updatePriceRange();
+            
+            // Reset sort
+            document.getElementById('sortBy').value = 'recommended';
+            
+            // Reload results
+            loadSearchResults();
+        }
+
+        // Sort results
+        function sortResults() {
+            loadSearchResults();
+        }
+
+        // Reset search
+        function resetSearch() {
+            clearAllFilters();
+        }
+
+        // View hotel details
+        function viewHotelDetails(hotelId) {
+            window.location.href = `hotel-details.html?id=${hotelId}`;
+        }
+
+        // Book hotel
+        function bookHotel(hotelId) {
+            const hotel = hotelsData.find(h => h.id === hotelId);
+            if (hotel) {
+                // Save hotel data for booking page
+                localStorage.setItem('selectedHotel', JSON.stringify(hotel));
+                window.location.href = `booking.html?hotelId=${hotelId}`;
+            }
+        }
+
+        // Toggle map view
+        function toggleMapView() {
+            const mapModal = document.getElementById('mapModal');
+            mapModal.style.display = 'flex';
+        }
+
+        // Close map modal
+        function closeMapModal() {
+            document.getElementById('mapModal').style.display = 'none';
+        }
+
+        // Search form submission
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const destination = document.getElementById('destination').value;
+            document.getElementById('searchLocation').textContent = `Hotels in ${destination}`;
+            loadSearchResults();
+        });
+    </script>
+</body>
+</html>

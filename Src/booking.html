@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking | Stay Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <!-- Loader should be FIRST element in body -->
+    <div class="loader-overlay" id="mainLoader">
+        <div class="logo-loader">
+            <div class="logo">
+                <span>S</span><span>tay</span> <span>F</span><span>inder</span>
+            </div>
+            <div class="loading-text">Preparing your booking...</div>
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-red">S</span>
+                        <span class="logo-text">tay <span class="logo-blue">Finder</span></span>
+                    </a>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="index.html" class="btn-login">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="booking-container">
+        <div class="container">
+            <!-- Booking Progress -->
+            <div class="booking-progress">
+                <div class="progress-step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Room Selection</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Guest Details</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="progress-step">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+
+            <div class="booking-layout">
+                <!-- Left Column - Room Selection -->
+                <div class="booking-left">
+                    <!-- Hotel Info -->
+                    <div class="hotel-info-card animate-fade-in">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop" 
+                             alt="Taj Mahal Palace" class="hotel-image">
+                        
+                        <div class="hotel-details">
+                            <h1 id="hotelName">Taj Mahal Palace, Mumbai</h1>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="hotelLocation">Mumbai, Maharashtra</span>
+                            </div>
+                            
+                            <div class="hotel-rating">
+                                <span class="rating-badge">4.8</span>
+                                <span class="rating-text">Excellent (1,247 reviews)</span>
+                            </div>
+                            
+                            <div class="hotel-amenities">
+                                <span class="amenity"><i class="fas fa-wifi"></i> Free WiFi</span>
+                                <span class="amenity"><i class="fas fa-swimming-pool"></i> Pool</span>
+                                <span class="amenity"><i class="fas fa-utensils"></i> Breakfast</span>
+                                <span class="amenity"><i class="fas fa-spa"></i> Spa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Room Selection -->
+                    <div class="room-selection">
+                        <h2><i class="fas fa-bed"></i> Select Your Room</h2>
+                        
+                        <div class="room-option selected" data-room="deluxe">
+                            <div class="room-header">
+                                <div>
+                                    <h3>Deluxe King Room</h3>
+                                    <p class="room-description">
+                                        Spacious room with king bed, sea view, and luxury amenities
+                                    </p>
+                                </div>
+                                <div class="room-price">
+                                    <span class="price">₹28,999</span>
+                                    <span class="per-night">per night</span>
+                                </div>
+                            </div>
+                            
+                            <div class="room-amenities">
+                                <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                                <span><i class="fas fa-tv"></i> Smart TV</span>
+                                <span><i class="fas fa-coffee"></i> Coffee Maker</span>
+                                <span><i class="fas fa-snowflake"></i> Air Conditioning</span>
+                            </div>
+                            
+                            <div class="room-footer">
+                                <div class="room-availability">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Free cancellation until Dec 20</span>
+                                </div>
+                                <button class="select-room-btn selected">
+                                    Selected <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="room-option" data-room="premium">
+                            <div class="room-header">
+                                <div>
+                                    <h3>Premium Suite</h3>
+                                    <p class="room-description">
+                                        Luxury suite with separate living area and balcony
+                                    </p>
+                                </div>
+                                <div class="room-price">
+                                    <span class="price">₹38,999</span>
+                                    <span class="per-night">per night</span>
+                                </div>
+                            </div>
+                            
+                            <div class="room-amenities">
+                                <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                                <span><i class="fas fa-hot-tub"></i> Jacuzzi</span>
+                                <span><i class="fas fa-utensils"></i> Mini Bar</span>
+                                <span><i class="fas fa-concierge-bell"></i> Butler Service</span>
+                            </div>
+                            
+                            <div class="room-footer">
+                                <div class="room-availability">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Free cancellation until Dec 20</span>
+                                </div>
+                                <button class="select-room-btn">
+                                    Select Room
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="room-option" data-room="family">
+                            <div class="room-header">
+                                <div>
+                                    <h3>Family Room</h3>
+                                    <p class="room-description">
+                                        Perfect for families with two queen beds
+                                    </p>
+                                </div>
+                                <div class="room-price">
+                                    <span class="price">₹32,999</span>
+                                    <span class="per-night">per night</span>
+                                </div>
+                            </div>
+                            
+                            <div class="room-amenities">
+                                <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                                <span><i class="fas fa-child"></i> Kids Amenities</span>
+                                <span><i class="fas fa-gamepad"></i> Game Console</span>
+                                <span><i class="fas fa-sink"></i> Kitchenette</span>
+                            </div>
+                            
+                            <div class="room-footer">
+                                <div class="room-availability">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Free cancellation until Dec 20</span>
+                                </div>
+                                <button class="select-room-btn">
+                                    Select Room
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guest Details -->
+                    <div class="guest-details-section">
+                        <h2><i class="fas fa-user-friends"></i> Guest Information</h2>
+                        
+                        <form class="guest-form" id="guestForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="guestEmail">Email Address *</label>
+                                    <input type="email" id="guestEmail" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="guestPhone">Phone Number *</label>
+                                    <input type="tel" id="guestPhone" placeholder="+91 " required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="specialRequests">Special Requests (Optional)</label>
+                                    <textarea id="specialRequests" 
+                                              rows="4" 
+                                              placeholder="Any special requests or preferences..."></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Booking Summary -->
+                <div class="booking-right">
+                    <div class="booking-summary-card animate-slide-in">
+                        <h2><i class="fas fa-receipt"></i> Booking Summary</h2>
+                        
+                        <div class="summary-dates">
+                            <div class="date-group">
+                                <label>Check-in</label>
+                                <div class="date-display" id="summaryCheckin">Dec 25, 2024</div>
+                            </div>
+                            
+                            <div class="date-group">
+                                <label>Check-out</label>
+                                <div class="date-display" id="summaryCheckout">Dec 30, 2024</div>
+                            </div>
+                            
+                            <div class="date-group">
+                                <label>Nights</label>
+                                <div class="date-display">5 nights</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-guests">
+                            <label>Guests</label>
+                            <div class="guests-display">
+                                <span id="guestCount">2 adults, 0 children</span>
+                                <button class="edit-guests-btn" id="editGuestsBtn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-room">
+                            <label>Selected Room</label>
+                            <div class="room-display">
+                                <strong id="selectedRoomName">Deluxe King Room</strong>
+                                <span class="room-price">₹28,999/night</span>
+                            </div>
+                        </div>
+                        
+                        <div class="price-breakdown">
+                            <h3>Price Details</h3>
+                            
+                            <div class="price-row">
+                                <span>Room (5 nights × ₹28,999)</span>
+                                <span id="roomTotal">₹1,44,995</span>
+                            </div>
+                            
+                            <div class="price-row">
+                                <span>Taxes & Fees (18%)</span>
+                                <span id="taxesTotal">₹26,099</span>
+                            </div>
+                            
+                            <div class="price-row">
+                                <span>Service Charge</span>
+                                <span>₹2,000</span>
+                            </div>
+                            
+                            <div class="price-row discount">
+                                <span>Discount (25% OFF)</span>
+                                <span>-<span id="discountTotal">₹36,249</span></span>
+                            </div>
+                            
+                            <div class="price-row total">
+                                <span>Total Amount</span>
+                                <span id="finalTotal">₹1,36,845</span>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-policies">
+                            <h3><i class="fas fa-info-circle"></i> Important Information</h3>
+                            <ul>
+                                <li>Free cancellation until Dec 20, 2024</li>
+                                <li>No prepayment needed - pay at the property</li>
+                                <li>Check-in: 2:00 PM, Check-out: 12:00 PM</li>
+                                <li>Breakfast included for all guests</li>
+                                <li>GST included in the price</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="continue-btn" id="continueToPayment">
+                            Continue to Payment
+                        </button>
+                        
+                        <p class="secure-booking">
+                            <i class="fas fa-lock"></i>
+                            Secure booking powered by Stay Finder
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Guest Editor Modal -->
+    <div class="guest-modal" id="guestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Guests</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="guest-counter">
+                    <div class="counter-item">
+                        <div>
+                            <strong>Adults</strong>
+                            <p>Ages 13+</p>
+                        </div>
+                        <div class="counter">
+                            <button class="counter-btn" data-type="adults" data-action="decrease">-</button>
+                            <span class="counter-value" id="modalAdults">2</span>
+                            <button class="counter-btn" data-type="adults" data-action="increase">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="counter-item">
+                        <div>
+                            <strong>Children</strong>
+                            <p>Ages 0-12</p>
+                        </div>
+                        <div class="counter">
+                            <button class="counter-btn" data-type="children" data-action="decrease">-</button>
+                            <span class="counter-value" id="modalChildren">0</span>
+                            <button class="counter-btn" data-type="children" data-action="increase">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="counter-item">
+                        <div>
+                            <strong>Rooms</strong>
+                        </div>
+                        <div class="counter">
+                            <button class="counter-btn" data-type="rooms" data-action="decrease">-</button>
+                            <span class="counter-value" id="modalRooms">1</span>
+                            <button class="counter-btn" data-type="rooms" data-action="increase">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn-cancel">Cancel</button>
+                    <button class="btn-apply">Apply Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Stay Finder. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-rupay"></i>
+                    <i class="fas fa-university"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+    <script src="booking.js"></script>
+
+    <!-- Add this script to hide loader -->
+    <script>
+        // Simple loader hide function
+        function hideLoader() {
+            const loader = document.getElementById('mainLoader');
+            if (loader) {
+                // Add fade-out class
+                loader.classList.add('fade-out');
+                // Remove after animation completes
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }
+        }
+
+        // Hide loader when page is fully loaded
+        window.addEventListener('load', function() {
+            setTimeout(hideLoader, 1500); // Wait 1.5 seconds then hide
+        });
+
+        // Fallback: hide loader after 3 seconds max
+        setTimeout(hideLoader, 3000);
+    </script>
+</body>
+</html>

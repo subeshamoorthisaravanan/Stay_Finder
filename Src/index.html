@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Finder | Find Hotels, Flights, and More</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="animation.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-red">S</span>
+                        <span class="logo-text">tay <span class="logo-blue">Finder</span></span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-hotel"></i> Hotels
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-plane"></i> Flights
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-suitcase"></i> Bundle & Save
+                    </a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-percent"></i> Deals
+                    </a>
+                </nav>
+
+                <!-- User Actions -->
+                <div class="user-actions">
+                    <!-- <div class="currency-selector">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>MYR</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div> -->
+                    
+                    <a href="#" class="list-property">List your property</a>
+                    
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    
+                    <div class="auth-buttons">
+                        <a href="#" class="btn-login">
+                            <i class="fas fa-user-circle"></i> Login
+                        </a>
+                        <a href="#" class="btn-register">Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button type="button" class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Search -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Find your perfect stay</h1>
+                <p class="hero-subtitle">Search deals on hotels, homes, and much more...</p>
+                
+                <!-- Search Form -->
+                <div class="search-container">
+                    <div class="search-tabs">
+                        <button class="search-tab active">Stays</button>
+                        <button class="search-tab">Flights</button>
+                        <button class="search-tab">Cars</button>
+                        <button class="search-tab">Packages</button>
+                    </div>
+                    
+                    <form class="search-form" id="searchForm">
+                        <div class="search-grid">
+                            <!-- Destination -->
+                            <div class="search-group">
+                                <label class="search-label">
+                                    <i class="fas fa-map-marker-alt"></i> Destination
+                                </label>
+                                <input type="text" 
+                                       class="search-input" 
+                                       placeholder="Where are you going?"
+                                       id="destination"
+                                       required>
+                            </div>
+                            
+                            <!-- Check-in -->
+                            <div class="search-group">
+                                <label class="search-label">
+                                    <i class="fas fa-calendar"></i> Check-in
+                                </label>
+                                <input type="text" 
+                                       class="search-input datepicker" 
+                                       placeholder="Add dates"
+                                       id="checkin"
+                                       required>
+                            </div>
+                            
+                            <!-- Check-out -->
+                            <div class="search-group">
+                                <label class="search-label">
+                                    <i class="fas fa-calendar"></i> Check-out
+                                </label>
+                                <input type="text" 
+                                       class="search-input datepicker" 
+                                       placeholder="Add dates"
+                                       id="checkout"
+                                       required>
+                            </div>
+                            
+                            <!-- Guests -->
+                            <div class="search-group">
+                                <label class="search-label">
+                                    <i class="fas fa-user-friends"></i> Guests & Rooms
+                                </label>
+                                <div class="guest-selector" id="guestSelector">
+                                    <input type="text" 
+                                           class="search-input" 
+                                           placeholder="2 adults, 0 children, 1 room"
+                                           readonly>
+                                    <div class="guest-dropdown" id="guestDropdown">
+                                        <div class="guest-option">
+                                            <div>
+                                                <strong>Adults</strong>
+                                                <p>Ages 13+</p>
+                                            </div>
+                                            <div class="counter">
+                                                <button type="button" class="counter-btn" data-action="decrease" data-type="adults">-</button>
+                                                <span class="counter-value" id="adultsCount">2</span>
+                                                <button type="button" class="counter-btn" data-action="increase" data-type="adults">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="guest-option">
+                                            <div>
+                                                <strong>Children</strong>
+                                                <p>Ages 0-12</p>
+                                            </div>
+                                            <div class="counter">
+                                                <button type="button" class="counter-btn" data-action="decrease" data-type="children">-</button>
+                                                <span class="counter-value" id="childrenCount">0</span>
+                                                <button type="button" class="counter-btn" data-action="increase" data-type="children">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="guest-option">
+                                            <div>
+                                                <strong>Rooms</strong>
+                                            </div>
+                                            <div class="counter">
+                                                <button type="button" class="counter-btn" data-action="decrease" data-type="rooms">-</button>
+                                                <span class="counter-value" id="roomsCount">1</span>
+                                                <button type="button" class="counter-btn" data-action="increase" data-type="rooms">+</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-apply" id="applyGuests">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Search Button -->
+                            <div class="search-group">
+                                <button type="submit" class="search-btn">
+                                    <i class="fas fa-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-badges">
+                <div class="badge-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h3>Secure Booking</h3>
+                        <p>SSL Encryption</p>
+                    </div>
+                </div>
+                <div class="badge-item">
+                    <i class="fas fa-star"></i>
+                    <div>
+                        <h3>Best Price</h3>
+                        <p>Guaranteed</p>
+                    </div>
+                </div>
+                <div class="badge-item">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <h3>Worldwide</h3>
+                        <p>2M+ Properties</p>
+                    </div>
+                </div>
+                <div class="badge-item">
+                    <i class="fas fa-credit-card"></i>
+                    <div>
+                        <h3>Easy Payment</h3>
+                        <p>Multiple Options</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Hotels -->
+    <section class="featured-hotels">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Hotels</h2>
+                <a href="search.html" class="view-all">View all <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="hotels-grid" id="featuredHotels">
+                <!-- Hotels will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+<!-- INSERT INDIAN CITIES HERE -->
+<section class="indian-cities">
+    <div class="container">
+        <h2 class="section-title">Popular Indian Cities</h2>
+        <p class="section-subtitle">Explore hotels across India's most loved destinations</p>
+        
+        <div class="city-grid">
+            <div class="city-card" onclick="searchCity('Delhi')">
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&auto=format&fit=crop" alt="Delhi">
+                <h3>Delhi</h3>
+            </div>
+            <div class="city-card" onclick="searchCity('Mumbai')">
+                <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=400&auto=format&fit=crop" alt="Mumbai">
+                <h3>Mumbai</h3>
+            </div>
+            <div class="city-card" onclick="searchCity('Goa')">
+                <img src="https://images.unsplash.com/photo-1529255484355-cb73c33c04bb?w=400&auto=format&fit=crop" alt="Goa">
+                <h3>Goa</h3>
+            </div>
+            <div class="city-card" onclick="searchCity('Jaipur')">
+                <img src="https://images.unsplash.com/photo-1585506936724-fa0c19c6ac81?w=400&auto=format&fit=crop" alt="Jaipur">
+                <h3>Jaipur</h3>
+            </div>
+            <div class="city-card" onclick="searchCity('Bangalore')">
+                <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=400&auto=format&fit=crop" alt="Bangalore">
+                <h3>Bangalore</h3>
+            </div>
+            <div class="city-card" onclick="searchCity('Kerala')">
+                <img src="https://images.unsplash.com/photo-1526489565690-4d1f1b9be7a2?w=400&auto=format&fit=crop" alt="Kerala">
+                <h3>Kerala</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Deals Section -->
+    <!-- <section class="deals-section">
+        <div class="container">
+            <h2 class="section-title">Today's Best Deals</h2>
+            <div class="deals-grid">
+                <div class="deal-card">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop" alt="Luxury Hotel">
+                    <div class="deal-content">
+                        <span class="deal-badge">30% OFF</span>
+                        <h3>Luxury Hotel & Spa</h3>
+                        <p class="deal-location">Kuala Lumpur</p>
+                        <div class="deal-price">
+                            <span class="old-price">₹1999</span>
+                            <span class="new-price">₹1599</span>
+                            <span class="per-night">per night</span>
+                        </div>
+                        <button class="deal-btn" onclick="window.location.href='hotel-details.html?id=1'">
+                            View Deal
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&auto=format&fit=crop" alt="Beach Resort">
+                    <div class="deal-content">
+                        <span class="deal-badge">25% OFF</span>
+                        <h3>Beachfront Resort</h3>
+                        <p class="deal-location">Bali, Indonesia</p>
+                        <div class="deal-price">
+                            <span class="old-price">₹2499</span>
+                            <span class="new-price">₹2099</span>
+                            <span class="per-night">per night</span>
+                        </div>
+                        <button class="deal-btn" onclick="window.location.href='hotel-details.html?id=2'">
+                            View Deal
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="deal-card">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&auto=format&fit=crop" alt="City Hotel">
+                    <div class="deal-content">
+                        <span class="deal-badge">20% OFF</span>
+                        <h3>City Center Hotel</h3>
+                        <p class="deal-location">Singapore</p>
+                        <div class="deal-price">
+                            <span class="old-price">₹2999</span>
+                            <span class="new-price">₹2499</span>
+                            <span class="per-night">per night</span>
+                        </div>
+                        <button class="deal-btn" onclick="window.location.href='hotel-details.html?id=3'">
+                            View Deal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Get Exclusive Deals</h2>
+                <p>Subscribe to our newsletter and save up to 50% on your next booking</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>StayFinder</h3>
+                    <p>Find the perfect hotel at the best price. Book with confidence.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Discover</h4>
+                    <ul>
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Flights</a></li>
+                        <li><a href="#">Car Rentals</a></li>
+                        <li><a href="#">Travel Guides</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Cancellation Options</a></li>
+                        <li><a href="#">Safety Information</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 StayFinder. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+</body>
+</html>

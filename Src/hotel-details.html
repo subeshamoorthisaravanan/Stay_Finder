@@ -474,16 +474,28 @@
                         </div>
                         
                         <form class="booking-form" id="bookingWidgetForm">
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar"></i> Check-in</label>
-                                <input type="text" class="date-input" id="checkinDate" 
-                                       placeholder="Select date" readonly>
+                            <!-- Check-in -->
+                            <div class="search-group">
+                                <label class="search-label">
+                                    <i class="fas fa-calendar"></i> Check-in
+                                </label>
+                                <input type="text" 
+                                       class="search-input datepicker" 
+                                       placeholder="Add dates"
+                                       id="checkin"
+                                       required>
                             </div>
                             
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar"></i> Check-out</label>
-                                <input type="text" class="date-input" id="checkoutDate" 
-                                       placeholder="Select date" readonly>
+                            <!-- Check-out -->
+                            <div class="search-group">
+                                <label class="search-label">
+                                    <i class="fas fa-calendar"></i> Check-out
+                                </label>
+                                <input type="text" 
+                                       class="search-input datepicker" 
+                                       placeholder="Add dates"
+                                       id="checkout"
+                                       required>
                             </div>
                             
                             <div class="form-group">

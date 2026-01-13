@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up | Stay Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="auth.css">
+    <script src="auth.js"></script>
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Rectangle Corner Close Button -->
+        <button class="close-btn" id="closeBtn" title="Close" onclick="window.location.href='index.html'">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Header -->
+        <div class="auth-header">
+            <div class="logo">
+                <span class="logo-red">S</span>
+                <span>tay Finder</span>
+            </div>
+            <p class="header-subtitle">Find your perfect stay</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+            <button class="tab active" data-tab="login">Login</button>
+            <button class="tab" data-tab="signup">Create Account</button>
+        </div>
+
+        <!-- Forms Container -->
+        <div class="form-container">
+            <!-- Login Form -->
+            <form class="form active" id="loginForm">
+                <h2 class="form-title">Welcome Back</h2>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" 
+                               class="form-input" 
+                               id="loginEmail"
+                               placeholder="Email address"
+                               required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" 
+                               class="form-input" 
+                               id="loginPassword"
+                               placeholder="Password"
+                               required>
+                        <button type="button" class="password-toggle" data-target="loginPassword" title="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-link" id="forgotPassword">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                
+                <div class="divider">
+                    <span>Or continue with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                </div>
+                
+                <div class="form-footer">
+                    Don't have an account?
+                    <a href="#" class="switch-tab" data-tab="signup">Sign up</a>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="form" id="signupForm">
+                <h2 class="form-title">Create Account</h2>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" 
+                               class="form-input" 
+                               id="fullName"
+                               placeholder="Full name"
+                               required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" 
+                               class="form-input" 
+                               id="signupEmail"
+                               placeholder="Email address"
+                               required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" 
+                               class="form-input" 
+                               id="phone"
+                               placeholder="Phone number"
+                               required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" 
+                               class="form-input" 
+                               id="signupPassword"
+                               placeholder="Create password"
+                               required>
+                        <button type="button" class="password-toggle" data-target="signupPassword" title="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Password strength: Weak</div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" 
+                               class="form-input" 
+                               id="confirmPassword"
+                               placeholder="Confirm password"
+                               required>
+                        <button type="button" class="password-toggle" data-target="confirmPassword" title="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="termsAgreement" required>
+                    <label for="termsAgreement">
+                        I agree to the <a href="#" style="color: #ff385c;">Terms & Conditions</a> and 
+                        <a href="#" style="color: #ff385c;">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                
+                <div class="divider">
+                    <span>Or sign up with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                </div>
+                
+                <div class="form-footer">
+                    Already have an account?
+                    <a href="#" class="switch-tab" data-tab="login">Sign in</a>
+                </div>
+            </form>
+
+            <!-- Back to Home Link -->
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <span id="successText">Successfully logged in!</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const tabs = document.querySelectorAll('.tab');
+            const forms = document.querySelectorAll('.form');
+            const switchTabLinks = document.querySelectorAll('.switch-tab');
+            const closeBtn = document.getElementById('closeBtn');
+            
+            // Tab Switching
+            function switchTab(tabName) {
+                // Update tabs
+                tabs.forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.tab === tabName);
+                });
+                
+                // Update forms
+                forms.forEach(form => {
+                    form.classList.toggle('active', form.id === tabName + 'Form');
+                });
+            }
+            
+            // Event Listeners for tabs
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    switchTab(this.dataset.tab);
+                });
+            });
+            
+            // Event Listeners for switch links
+            switchTabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    switchTab(this.dataset.tab);
+                });
+            });
+            
+            // Password Toggle
+            document.querySelectorAll('.password-toggle').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const input = document.getElementById(targetId);
+                    const icon = this.querySelector('i');
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.className = 'fas fa-eye-slash';
+                    } else {
+                        input.type = 'password';
+                        icon.className = 'fas fa-eye';
+                    }
+                });
+            });
+            
+            // Password Strength Indicator
+            const passwordInput = document.getElementById('signupPassword');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                if (password.length >= 8) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                const colors = ['#ff4757', '#ffa502', '#2ed573', '#2ed573'];
+                const texts = ['Weak', 'Fair', 'Good', 'Strong'];
+                
+                const width = (strength / 4) * 100;
+                strengthBar.style.width = width + '%';
+                strengthBar.style.background = colors[strength - 1] || colors[0];
+                strengthText.textContent = `Password strength: ${texts[strength - 1] || texts[0]}`;
+            });
+            
+            // Forgot Password
+            document.getElementById('forgotPassword').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = prompt('Enter your email to reset password:');
+                if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert(`Password reset link has been sent to ${email}`);
+                } else if (email) {
+                    alert('Please enter a valid email address');
+                }
+            });
+            
+            // Login Form Submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+                const form = this;
+                const submitBtn = form.querySelector('.submit-btn');
+                
+                // Validation
+                if (!email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showError('Please enter a valid email address');
+                    return;
+                }
+                
+                // Show loading
+                form.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Success
+                    showSuccess('Successfully logged in!');
+                    
+                    // Redirect to home page
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                    
+                    form.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+            
+            // Signup Form Submission
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const form = this;
+                const fullName = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const password = document.getElementById('signupPassword').value.trim();
+                const confirmPassword = document.getElementById('confirmPassword').value.trim();
+                const termsAgreement = document.getElementById('termsAgreement').checked;
+                const submitBtn = form.querySelector('.submit-btn');
+                
+                // Validation
+                if (!fullName || !email || !phone || !password || !confirmPassword) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showError('Please enter a valid email address');
+                    return;
+                }
+                
+                if (!/^[\+]?[1-9][\d]{0,15}$/.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+                    showError('Please enter a valid phone number');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    showError('Password must be at least 8 characters');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('Passwords do not match');
+                    return;
+                }
+                
+                if (!termsAgreement) {
+                    showError('Please agree to the Terms & Conditions');
+                    return;
+                }
+                
+                // Show loading
+                form.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Success
+                    showSuccess('Account created successfully!');
+                    
+                    // Switch to login tab
+                    setTimeout(() => {
+                        switchTab('login');
+                        form.reset();
+                        form.classList.remove('loading');
+                        submitBtn.disabled = false;
+                    }, 1500);
+                }, 1500);
+            });
+            
+            // Social Login Buttons
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const platform = this.classList.contains('google') ? 'Google' : 'Facebook';
+                    alert(`${platform} login would be implemented here`);
+                });
+            });
+            
+            // Helper Functions
+            function showError(message) {
+                const successMsg = document.getElementById('successMessage');
+                const successText = document.getElementById('successText');
+                
+                successMsg.style.background = '#ff4757';
+                successText.textContent = message;
+                successMsg.style.display = 'flex';
+                
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 3000);
+            }
+            
+            function showSuccess(message) {
+                const successMsg = document.getElementById('successMessage');
+                const successText = document.getElementById('successText');
+                
+                successMsg.style.background = '#4CAF50';
+                successText.textContent = message;
+                successMsg.style.display = 'flex';
+                
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Close button animation
+            closeBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'rotate(90deg)';
+            });
+            
+            closeBtn.addEventListener('mouseleave', function() {
+                this.style.transform = 'rotate(0deg)';
+            });
+            
+            // Press ESC to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
+        <!-- Add this script to hide loader -->
+    <script>
+        // Simple loader hide function
+        function hideLoader() {
+            const loader = document.getElementById('mainLoader');
+            if (loader) {
+                // Add fade-out class
+                loader.classList.add('fade-out');
+                // Remove after animation completes
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }
+        }
+
+        // Hide loader when page is fully loaded
+        window.addEventListener('load', function() {
+            setTimeout(hideLoader, 1500); // Wait 1.5 seconds then hide
+        });
+
+        // Fallback: hide loader after 3 seconds max
+        setTimeout(hideLoader, 3000);
+    </script>
+</body>
+</html>

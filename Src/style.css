@@ -164,7 +164,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #0071c2 0%, #00447c 100%);
+    /* background: linear-gradient(135deg, #0071c2 0%, #00447c 100%); */
     color: white;
     padding: 60px 0;
 }
@@ -542,13 +542,13 @@ body {
 
 /* Updated hero section for India */
 .hero {
-    background: linear-gradient(135deg, #ff9933 0%, #138808 100%);
-    color: white;
+    /* background: linear-gradient(135deg, #ff9933 0%, #138808 100%); */
+    color: #414141;
 }
 
 /* Trust badges with Indian context */
 .trust-section {
-    background: linear-gradient(to right, #ff9933, #ffffff, #138808);
+    /* background: linear-gradient(to right, #ff9933, #ffffff, #138808); */
 }
 
 .badge-item:nth-child(1) i {
